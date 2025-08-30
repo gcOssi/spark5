@@ -169,12 +169,6 @@ jobs:
           docker build -t "$FE_IMAGE:latest" .
           docker push "$FE_IMAGE:latest"
 
-      - name: Build & Push Frontend Nginx Auth Sidecar
-        working-directory: ./frontend
-        run: |
-          docker build -t "$FE_NGINX_IMAGE:latest" -f Dockerfile.nginx .
-          docker push "$FE_NGINX_IMAGE:latest"
-
       - name: Build & Push Backend
         working-directory: ./backend
         run: |
