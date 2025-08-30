@@ -21,7 +21,7 @@ git push origin main
 ```
 El launcher `.github/workflows/deploy.yml` invoca `cicd/deploy.yml`: Terraform → ECR login → build & push → re-apply.
 
-## 4) Acceso público (HTTPS + Basic Auth)
+## 4) Acceso público (HTTPS)
 - Copia el output `cloudfront_domain_name` (en logs o local con `terraform output`).
 - Abre `https://<cloudfront_domain_name>/` → ingresa con:
   - usuario: `staging`, password: `staging` (valores por defecto en SSM).

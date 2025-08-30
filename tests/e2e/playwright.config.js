@@ -1,1 +1,0 @@
-const { defineConfig, devices } = require('@playwright/test');module.exports=defineConfig({use:{baseURL:process.env.BASE_URL||'http://localhost:8080',httpCredentials:{username:process.env.BASIC_AUTH_USER||'staging',password:process.env.BASIC_AUTH_PASS||'staging'}} ,projects:[{name:'chromium',use:{...devices['Desktop Chrome']}}]});
