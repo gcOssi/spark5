@@ -92,11 +92,6 @@ resource "aws_ecs_service" "frontend" {
     security_groups  = [aws_security_group.ecs_tasks.id]
     assign_public_ip = false
   }
-  load_balancer {
-    target_group_arn = aws_lb_target_group.fe.arn
-    container_name   = "auth-proxy"
-    container_port   = 80
-  }
   depends_on = [aws_lb_listener.http]
 }
 
