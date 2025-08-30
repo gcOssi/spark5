@@ -44,10 +44,6 @@ resource "aws_ecs_task_definition" "frontend" {
       "image" : "${aws_ecr_repository.frontend.repository_url}-nginx:latest",
       "essential" : true,
       "portMappings" : [{ "containerPort" : 80, "hostPort" : 80, "protocol" : "tcp" }],
-      "environment" : [
-        { "name" : "BASIC_AUTH_USER", "valueFrom" : "${aws_ssm_parameter.basic_user.arn}" },
-        { "name" : "BASIC_AUTH_PASS", "valueFrom" : "${aws_ssm_parameter.basic_pass.arn}" }
-      ],
       "logConfiguration" : {
         "logDriver" : "awslogs",
         "options" : {
