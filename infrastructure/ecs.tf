@@ -13,7 +13,7 @@ resource "aws_cloudwatch_log_group" "be" {
   retention_in_days = 14
 }
 
-# Frontend TaskDefinition with nginx sidecar for Basic Auth
+# Frontend TaskDefinition
 resource "aws_ecs_task_definition" "frontend" {
   family                   = "${var.name_prefix}-fe"
   network_mode             = "awsvpc"
@@ -38,21 +38,6 @@ resource "aws_ecs_task_definition" "frontend" {
           "awslogs-stream-prefix" : "frontend"
         }
       }
-    },
-    {
-      "name" : "auth-proxy",
-      "image" : "${aws_ecr_repository.frontend.repository_url}-nginx:latest",
-      "essential" : true,
-      "portMappings" : [{ "containerPort" : 80, "hostPort" : 80, "protocol" : "tcp" }],
-      "logConfiguration" : {
-        "logDriver" : "awslogs",
-        "options" : {
-          "awslogs-group" : "${aws_cloudwatch_log_group.fe.name}",
-          "awslogs-region" : "${var.region}",
-          "awslogs-stream-prefix" : "nginx"
-        }
-      },
-      "dependsOn" : [{ "containerName" : "frontend", "condition" : "START" }],
     }
   ])
   runtime_platform {
